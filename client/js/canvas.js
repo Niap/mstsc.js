@@ -72,7 +72,10 @@
 	 * Un compress bitmap are reverse in y axis
 	 */
 	function reverse (bitmap) {
-		return { width : bitmap.width, height : bitmap.height, data : new Uint8ClampedArray(bitmap.data) };
+		
+		var dest = new Uint8ClampedArray(bitmap.buffer);
+		
+		return { width : bitmap.w, height : bitmap.h, data : dest};
 	}
 
 	/**
@@ -101,7 +104,8 @@
 			// use image data to use asm.js
 			var imageData = this.ctx.createImageData(output.width, output.height);
 			imageData.data.set(output.data);
-			this.ctx.putImageData(imageData, bitmap.destLeft, bitmap.destTop);
+			
+			this.ctx.putImageData(imageData, bitmap.x, bitmap.y);
 		}
 	}
 	

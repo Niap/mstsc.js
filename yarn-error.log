@@ -1,0 +1,57 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\yarn\bin\yarn.js
+
+PATH: 
+  C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Xietong\bin;C:\Users\Xietong\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Xietong\bin;C:\Perl64\site\bin;C:\Perl64\bin;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\WiFi\bin;C:\Program Files\Common Files\Intel\WirelessCommon;C:\Users\Xietong\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\Java\jdk1.8.0_211\bin;C:\ProgramData\chocolatey\lib\maven\apache-maven-3.6.3\bin;C:\Program Files\Microsoft SQL Server\120\Tools\Binn;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit;C:\Windows\SysWOW64\WindowsPowerShell\v1.0\Modules\TShell\TShell;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit;C:\TDM-GCC-32\bin;C:\Program Files\CMake\bin;C:\Users\Xietong\.windows-build-tools\python27;C:\Users\Xietong\AppData\Local\Microsoft\WindowsApps;C:\Users\Xietong\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Xietong\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+
+Yarn version: 
+  1.22.0
+
+Node version: 
+  8.14.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  SyntaxError: D:\Playground\mstsc.js\package.json: Unexpected token } in JSON at position 390
+      at JSON.parse (<anonymous>)
+      at C:\Users\Xietong\AppData\Roaming\nvm\v8.14.0\node_modules\yarn\lib\cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (C:\Users\Xietong\AppData\Roaming\nvm\v8.14.0\node_modules\yarn\lib\cli.js:310:30)
+      at C:\Users\Xietong\AppData\Roaming\nvm\v8.14.0\node_modules\yarn\lib\cli.js:321:13
+      at <anonymous>
+
+npm manifest: 
+  {
+  	"name": "mstsc.js",
+  	"author": "Sylvain Peyrefitte",
+  	"version": "0.2.4",
+  	"engines": 
+  	[
+  		"node = 0.10.x"
+  	],
+  	"description": "A Remote Desktop Protocol Client written in javascript",
+  	"license": "AGPL v3.0",
+  	"repository": {
+  		"type": "git",
+  		"url": "https://github.com/citronneur/mstsc.js"
+  	},
+  	"main": "server.js",
+  	"dependencies": {
+  		"express": "4.x.x",
+  		"socket.io": "1.3.x",
+  	},
+  	"scripts": {
+  		"start": "node server.js"
+  	},
+  	"cozy-permissions": {},
+  	"cozy-displayName": "Mstsc.js",
+  	"icon-path": "client/img/mstsc.js.svg"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

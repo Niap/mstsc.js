@@ -17,7 +17,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var rdp = require('node-rdpjs');
+var freerdp = require('node-freerdp2');
 
 /**
  * Create proxy between rdp layer and socket io
@@ -33,15 +33,15 @@ module.exports = function (server) {
 				rdpClient.close();
 			};
 			
-			rdpClient = rdp.createClient({ 
+			rdpClient = new freerdp.Session({
+				host: infos.ip,
 				domain : infos.domain, 
-				userName : infos.username,
+				username : infos.username,
 				password : infos.password,
-				enablePerf : true,
-				autoLogin : true,
-				screen : infos.screen,
-				locale : infos.locale,
-				logLevel : process.argv[2] || 'INFO'
+				port: 3389, // optional
+				width: infos.screen.width, // optional
+				height: infos.screen.height, // optional
+				certIgnore: true
 			}).on('connect', function () {
 				client.emit('rdp-connect');
 			}).on('bitmap', function(bitmap) {
@@ -50,16 +50,17 @@ module.exports = function (server) {
 				client.emit('rdp-close');
 			}).on('error', function(err) {
 				client.emit('rdp-error', err);
-			}).connect(infos.ip, infos.port);
+			}).connect();
+
+
 		}).on('mouse', function (x, y, button, isPressed) {
 			if (!rdpClient)  return;
-
 			rdpClient.sendPointerEvent(x, y, button, isPressed);
 		}).on('wheel', function (x, y, step, isNegative, isHorizontal) {
 			if (!rdpClient) {
 				return;
 			}
-			rdpClient.sendWheelEvent(x, y, step, isNegative, isHorizontal);
+			//rdpClient.sendWheelEvent(x, y, step, isNegative, isHorizontal);
 		}).on('scancode', function (code, isPressed) {
 			if (!rdpClient) return;
 
@@ -67,7 +68,7 @@ module.exports = function (server) {
 		}).on('unicode', function (code, isPressed) {
 			if (!rdpClient) return;
 
-			rdpClient.sendKeyEventUnicode(code, isPressed);
+			//rdpClient.sendKeyEventUnicode(code, isPressed);
 		}).on('disconnect', function() {
 			if(!rdpClient) return;
 
