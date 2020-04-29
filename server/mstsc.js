@@ -18,6 +18,7 @@
  */
 
 var freerdp = require('node-freerdp2');
+var sharp = require('sharp');
 
 /**
  * Create proxy between rdp layer and socket io
@@ -44,8 +45,21 @@ module.exports = function (server) {
 				certIgnore: true
 			}).on('connect', function () {
 				client.emit('rdp-connect');
-			}).on('bitmap', function(bitmap) {
-				client.emit('rdp-bitmap', bitmap);
+			}).on('bitmap',function(bitmap) {
+				sharp(bitmap.buffer,{
+					raw: {
+					  width: bitmap.w,
+					  height: bitmap.h,
+					  channels: 4,
+					},
+				  }).removeAlpha().png({
+					compressionLevel : 3
+				  }).toBuffer().then( data => {
+					bitmap.buffer = "data:image/png;base64,"+new Buffer(data.buffer).toString('base64');
+					client.emit('rdp-bitmap', bitmap);
+				 }).catch( err => { 
+					 console.log(err)
+				  });
 			}).on('close', function() {
 				client.emit('rdp-close');
 			}).on('error', function(err) {

@@ -93,19 +93,24 @@
 		 * @param bitmap {object}
 		 */
 		update : function (bitmap) {
-			var output = null;
-			if (bitmap.isCompress) {
-				output = decompress(bitmap);
-			}
-			else {
-				output = reverse(bitmap);
-			}
+			// var output = null;
+			// if (bitmap.isCompress) {
+			// 	output = decompress(bitmap);
+			// }
+			// else {
+			// 	output = reverse(bitmap);
+			// }
 			
-			// use image data to use asm.js
-			var imageData = this.ctx.createImageData(output.width, output.height);
-			imageData.data.set(output.data);
-			
-			this.ctx.putImageData(imageData, bitmap.x, bitmap.y);
+			// var imageData = this.ctx.createImageData(output.width, output.height);
+			// imageData.data.set(output.data);
+			// this.ctx.putImageData(imageData, bitmap.x, bitmap.y);
+
+			var image = new Image();
+			var context = this.ctx;
+			image.src = bitmap.buffer;
+			image.onload = function(){
+				context.drawImage(image, bitmap.x, bitmap.y);
+			}
 		}
 	}
 	
