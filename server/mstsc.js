@@ -42,6 +42,7 @@ module.exports = function (server) {
 				port: 3389, // optional
 				width: infos.screen.width, // optional
 				height: infos.screen.height, // optional
+				app:infos.app,
 				certIgnore: true
 			}).on('connect', function () {
 				client.emit('rdp-connect');
@@ -52,14 +53,14 @@ module.exports = function (server) {
 					  height: bitmap.h,
 					  channels: 4,
 					},
-				  }).removeAlpha().png({
+				}).removeAlpha().png({
 					compressionLevel : 3
-				  }).toBuffer().then( data => {
+				}).toBuffer().then( data => {
 					bitmap.buffer = "data:image/png;base64,"+new Buffer(data.buffer).toString('base64');
 					client.emit('rdp-bitmap', bitmap);
-				 }).catch( err => { 
-					 console.log(err)
-				  });
+				}).catch( err => { 
+					console.log(err)
+				});
 			}).on('close', function() {
 				client.emit('rdp-close');
 			}).on('error', function(err) {
@@ -74,7 +75,7 @@ module.exports = function (server) {
 			if (!rdpClient) {
 				return;
 			}
-			//rdpClient.sendWheelEvent(x, y, step, isNegative, isHorizontal);
+			rdpClient.sendWheelEvent(x, y, step, isNegative, isHorizontal);
 		}).on('scancode', function (code, isPressed) {
 			if (!rdpClient) return;
 

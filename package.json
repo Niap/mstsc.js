@@ -15,7 +15,8 @@
 	"dependencies": {
 		"express": "4.x.x",
 		"sharp": "^0.25.2",
-		"socket.io": "1.3.x"
+		"socket.io": "1.3.x",
+		"node-freerdp2": "https://github.com/Niap/node-freerdp2"
 	},
 	"scripts": {
 		"start": "node server.js"

@@ -137,7 +137,7 @@
 		 * @param password {string} session password
 		 * @param next {function} asynchrone end callback
 		 */
-		connect : function (ip, domain, username, password, next) {
+		connect : function (ip, domain, username, password,app, next) {
 			// compute socket.io path (cozy cloud integration)
 			var parts = document.location.pathname.split('/')
 		      , base = parts.slice(0, parts.length - 1).join('/') + '/'
@@ -174,6 +174,7 @@
 				domain : domain, 
 				username : username, 
 				password : password, 
+				app : app, 
 				locale : Mstsc.locale()
 			});
 		}
